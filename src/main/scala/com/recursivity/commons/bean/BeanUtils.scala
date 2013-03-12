@@ -150,7 +150,7 @@ object BeanUtils {
       }catch{
         case e: InstantiationException => l = new java.util.ArrayList[Any]
       }
-      list.foreach(b => l.add(b))
+      list.foreach((b: Any) => l.add(b))
       return l
     }
   }
@@ -193,17 +193,17 @@ object BeanUtils {
       val listOrSet = cls.newInstance
       if (classOf[Builder[Any, Any]].isAssignableFrom(cls)) {
         val builder = listOrSet.asInstanceOf[Builder[Any, Any]]
-        list.foreach(b => builder += b)
+        list.foreach((b: Any) => builder += b)
         return builder
       } else if (classOf[LinkedList[_]].isAssignableFrom(cls)) {
         var seq = listOrSet.asInstanceOf[LinkedList[_]]
-        list.foreach(elem => {
+        list.foreach((elem: Any) => {
           seq = seq :+ elem
         })
         return seq
       } else if (classOf[DoubleLinkedList[_]].isAssignableFrom(cls)) {
         var seq = listOrSet.asInstanceOf[DoubleLinkedList[_]]
-        list.foreach(elem => {
+        list.foreach((elem: Any) => {
           seq = seq :+ elem
         })
         return seq
